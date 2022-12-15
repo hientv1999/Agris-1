@@ -398,12 +398,12 @@
             posVert();
             menuHeight = selectOffsetBot - menuExtras;
   
-            if (that.options.dropupAuto) {
-              that.$newElement.toggleClass('dropup', (selectOffsetTop > selectOffsetBot) && ((menuHeight - menuExtras) < menu.height()));
-            }
-            if (that.$newElement.hasClass('dropup')) {
-              menuHeight = selectOffsetTop - menuExtras;
-            }
+//             if (that.options.dropupAuto) {
+//               that.$newElement.toggleClass('dropup', (selectOffsetTop > selectOffsetBot) && ((menuHeight - menuExtras) < menu.height()));
+//             }
+//             if (that.$newElement.hasClass('dropup')) {
+//               menuHeight = selectOffsetTop - menuExtras;
+//             }
   
             if ((lisVis.length + lisVis.find('dt').length) > 3) {
               minHeight = liHeight * 3 + menuExtras - 2;

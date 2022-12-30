@@ -411,8 +411,8 @@
               minHeight = 0;
             }
   
-//             menu.css({'max-height': menuHeight + 'px', 'overflow': 'hidden', 'min-height': minHeight + headerHeight + searchHeight + actionsHeight + 'px'});
-//             menuInner.css({'max-height': menuHeight - headerHeight - searchHeight - actionsHeight - menuPadding + 'px', 'overflow-y': 'auto', 'min-height': Math.max(minHeight - menuPadding, 0) + 'px'});
+             menu.css({'max-height': menuHeight + 'px', 'overflow': 'hidden', 'min-height': minHeight + headerHeight + searchHeight + actionsHeight + 'px'});
+             menuInner.css({'max-height': menuHeight - headerHeight - searchHeight - actionsHeight - menuPadding + 'px', 'overflow-y': 'auto', 'min-height': Math.max(minHeight - menuPadding, 0) + 'px'});
           };
           getSize();
           this.$searchbox.off('input.getSize propertychange.getSize').on('input.getSize propertychange.getSize', getSize);

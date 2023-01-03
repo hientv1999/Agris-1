@@ -5,10 +5,16 @@ const preloaded_melodies_music = ['41.50,46.25,46.25,41.25,41.25,46.25,48.5,46.2
 
 function updateMusicSheet(music_notes, tempo){
     if (music_notes == ""){
-        document.getElementById("tune-up").style = "display: none";
-        document.getElementById("tune-down").style = "display: none";
-        document.getElementById("remove").style = "display: none";
-        document.getElementById("start-over").style = "display: none";
+        if (getCookie("melodySource_Agris") == "Customized"){
+            document.getElementById("tune-up").style = "display: none";
+            document.getElementById("tune-down").style = "display: none";
+            document.getElementById("remove").style = "display: none";
+            document.getElementById("start-over").style = "display: none";
+        } else {
+            document.getElementById("tune-up-preloaded").style = "display: none";
+            document.getElementById("tune-down-preloaded").style = "display: none";
+        }
+        
     } else {
         if (music_notes.split(",").length >= 256){
             document.getElementById("add").style = "display: none";
@@ -30,23 +36,38 @@ function updateMusicSheet(music_notes, tempo){
         }
         // ensure highest note is still within range
         if (highest_note < 87){
-            document.getElementById("tune-up").style = "display: inline; padding-right: 30px;";
+            if (getCookie("melodySource_Agris") == "Customized"){
+                document.getElementById("tune-up").style = "display: inline; padding-right: 30px;";
+            } else {
+                document.getElementById("tune-up-preloaded").style = "display: inline; padding-right: 30px;";
+            }
         } else {
-            document.getElementById("tune-up").style = "display: none";
+            if (getCookie("melodySource_Agris") == "Customized"){
+                document.getElementById("tune-up").style = "display: none";
+            } else {
+                document.getElementById("tune-up-preloaded").style = "display: none";
+            }
         }
         // ensure lowest note is still within range
         if (highest_note > 0){
-            document.getElementById("tune-down").style = "display: inline; padding-right: 30px;";
+            if (getCookie("melodySource_Agris") == "Customized"){
+                document.getElementById("tune-down").style = "display: inline; padding-right: 30px;";
+            } else {
+                document.getElementById("tune-down-preloaded").style = "display: inline; padding-right: 30px;";
+            }
         } else {
-            document.getElementById("tune-down").style = "display: none";
+            if (getCookie("melodySource_Agris") == "Customized"){
+                document.getElementById("tune-down").style = "display: none";
+            } else {
+                document.getElementById("tune-down-preloaded").style = "display: none";
+            }
         }
-        document.getElementById("tune-down").style = "display: inline; padding-right: 30px";
         document.getElementById("remove").style = "display: inline; padding-right: 30px";
         document.getElementById("start-over").style = "display: inline; padding-right: 30px";
         
     }
     
-    document.getElementById("submitted-melody").value = music_notes;
+    submitted_melody.value = music_notes;
     music_sheet.innerHTML = "";
     if (music_notes != ""){
         let music_note_array = music_notes.split(",");
@@ -106,7 +127,7 @@ function updateMusicSheet(music_notes, tempo){
 }
 
 function updatePreloadedMusicSheet(){
-    updateMusicSheet(document.getElementById("preloaded_melody_selector").value, document.getElementById("tempo").value);
+    updateMusicSheet(selector.value, document.getElementById("tempo").value);
 }
 function chooseNote(selected_value){
     let octave_selector = document.getElementById("customized_melody_octave");
@@ -265,6 +286,26 @@ function chooseOctave(selected_value){
     }
 }
 
+function toneUpPreloaded(){
+    let tuned_music = "";
+    let note_array = submitted_melody.value.split(",");
+    for (let i=0; i < note_array.length; i++){
+        tuned_music += (parseFloat(note_array[i]) + 1).toString() + "," ;
+    }
+    submitted_melody.value = tuned_music.slice(0, -1);
+    updateMusicSheet(submitted_melody.value, document.getElementById("tempo").value);
+}
+
+function toneDownPreloaded(){
+    let tuned_music = "";
+    let note_array = submitted_melody.value.split(",");
+    for (let i=0; i < note_array.length; i++){
+        tuned_music += (parseFloat(note_array[i]) - 1).toString() + "," ;
+    }
+    submitted_melody.value = tuned_music.slice(0, -1);
+    updateMusicSheet(submitted_melody.value, document.getElementById("tempo").value);
+}
+
 function toneUp(){
     let tuned_music = "";
     let note_array = customized_melody_music.split(",");
@@ -282,7 +323,6 @@ function toneDown(){
         tuned_music += (parseFloat(note_array[i]) - 1).toString() + "," ;
     }
     customized_melody_music = tuned_music.slice(0, -1);
-    alert(customized_melody_music);
     updateMusicSheet(customized_melody_music, document.getElementById("tempo").value);
 }
 
@@ -370,7 +410,7 @@ function updateMelodyLength(){
     if (getCookie("melodySource_Agris") == "Customized"){
         updateMusicSheet(customized_melody_music, document.getElementById("tempo").value);
     } else {
-        updateMusicSheet(document.getElementById("preloaded_melody_selector").value, document.getElementById("tempo").value);
+        updateMusicSheet(selector.value, document.getElementById("tempo").value);
     }
 }
 
@@ -397,12 +437,16 @@ function showPreloaded(){
     
     document.getElementById("introduction").innerHTML = "Choose 1 of below melodies for the alarm sound. More melodies will be added in the future";
     setCookie('melodySource_Agris', "Preloaded", 1);
-    document.getElementById("entire_preloaded_melody_selector").style="display: flex; justify-content: center;";
+    var customized_selectors = document.getElementsByClassName("entire_preloaded_melody_selector");
+    for (var i=0; i< customized_selectors.length; i++){
+        customized_selectors[i].style="display: flex; justify-content: center;";
+    }
+    
     var customized_selectors = document.getElementsByClassName("entire_customized_melody_selector");
     for (var i=0; i< customized_selectors.length; i++){
         customized_selectors[i].style="display: none";
     }
-    updateMusicSheet(document.getElementById("preloaded_melody_selector").value, document.getElementById("tempo").value);
+    updateMusicSheet(selector.value, document.getElementById("tempo").value);
     
 }
 
@@ -415,7 +459,11 @@ function showCustomized(){
     document.getElementById("preloaded-melody-title").style = "background-image: none";
     document.getElementById("introduction").innerHTML = "Build your own melody";
     setCookie('melodySource_Agris', "Customized", 1);
-    document.getElementById("entire_preloaded_melody_selector").style = "display: none";
+    var customized_selectors = document.getElementsByClassName("entire_preloaded_melody_selector");
+    for (var i=0; i< customized_selectors.length; i++){
+        customized_selectors[i].style="display: none";
+    }
+
     var customized_selectors = document.getElementsByClassName("entire_customized_melody_selector");
     for (var i=0; i< customized_selectors.length; i++){
         customized_selectors[i].style="display: flex; justify-content: center;";

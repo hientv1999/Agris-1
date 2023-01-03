@@ -1,11 +1,4 @@
-const preloaded_melodies_name = ['Before Winter Ends', 'weird song'];
-const preloaded_melodies_music = ['41.50,46.25,46.25,41.25,41.25,46.25,48.5,46.25,45.5,46,50,48.25,50.25,51.25,55.25,53,50.125,51.125,53.25,51.25,51.25,50.25,48.5,46.125,48.125,50.25,51.25,50.25,48.25,46.5,46.125,48.125,50.25,46.25,46.25,43.25,46.25,46.25,48.25,48.5,46',
-                                    '50, 41.5'];
 
-let preloaded_chosen = false;
-let selector = document.querySelector('#preloaded_melody_selector');
-let music_sheet = document.querySelector("#music-sheet");
-let customized_melody_music = '';
 
 for (let i=0; i<preloaded_melodies_name.length; i++){
     let opt = document.createElement('option');
@@ -338,71 +331,4 @@ function updateMelodyLength(){
     } else {
         updateMusicSheet(document.getElementById("preloaded_melody_selector").value, document.getElementById("tempo").value);
     }
-}
-
-function toggleApplyChange() {
-    var x = document.getElementById("apply-change");
-    var y = document.getElementById("submit-btn");
-    if (x.value == "no"){
-        x.value = "yes";
-        y.value = "APPLY CHANGE";
-    } else {
-        x.value = "no";
-        y.value = "PLAY MELODY";
-    }
-
-}
-function showPreloaded(){
-    if (getCookie("screenMode_Agris") == "DarkMode"){
-        document.getElementById("preloaded-melody-title").style = "background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url('https://drive.google.com/uc?export=view&id=1S2Vz16B5M46dWtDsirKE0TB_9H8g4xk_'); background-size: cover";
-    } else {
-        document.getElementById("preloaded-melody-title").style = "background-image: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.8)), url('https://drive.google.com/uc?export=view&id=1S2Vz16B5M46dWtDsirKE0TB_9H8g4xk_'); background-size: cover";
-    }
-    document.getElementById("customized-melody-title").style = "background-image: none";
-    
-    document.getElementById("introduction").innerHTML = "Choose 1 of below melodies for the alarm sound. More melodies will be added in the future";
-    setCookie('melodySource_Agris', "Preloaded", 1);
-    document.getElementById("entire_preloaded_melody_selector").style="display: flex; justify-content: center;";
-    var customized_selectors = document.getElementsByClassName("entire_customized_melody_selector");
-    for (var i=0; i< customized_selectors.length; i++){
-        customized_selectors[i].style="display: none";
-    }
-    updateMusicSheet(document.getElementById("preloaded_melody_selector").value, document.getElementById("tempo").value);
-    
-}
-
-function showCustomized(){
-    if (getCookie("screenMode_Agris") == "DarkMode"){
-        document.getElementById("customized-melody-title").style = "background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url('https://drive.google.com/uc?export=view&id=1S2Vz16B5M46dWtDsirKE0TB_9H8g4xk_'); background-size: cover";
-    } else {
-        document.getElementById("customized-melody-title").style = "background-image: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.8)), url('https://drive.google.com/uc?export=view&id=1S2Vz16B5M46dWtDsirKE0TB_9H8g4xk_'); background-size: cover";
-    }
-    document.getElementById("preloaded-melody-title").style = "background-image: none";
-    document.getElementById("introduction").innerHTML = "Build your own melody";
-    setCookie('melodySource_Agris', "Customized", 1);
-    document.getElementById("entire_preloaded_melody_selector").style = "display: none";
-    var customized_selectors = document.getElementsByClassName("entire_customized_melody_selector");
-    for (var i=0; i< customized_selectors.length; i++){
-        customized_selectors[i].style="display: flex; justify-content: center;";
-    }
-    updateMusicSheet(customized_melody_music, document.getElementById("tempo").value);
-}
-
-function toggleMelodySource() {
-    var source_element = event.srcElement;
-    if (source_element.id == "preloaded-melody-title" || source_element.parentElement.id == "preloaded-melody-title"){
-        showPreloaded();
-    } else if (source_element.id == "customized-melody-title" || source_element.parentElement.id == "customized-melody-title"){
-       showCustomized();
-    }
-}
-
-var melody_source_Agris = getCookie("melodySource_Agris");
-if (melody_source_Agris == "Preloaded"){
-    showPreloaded();
-} else if (melody_source_Agris == "Customized"){
-    showCustomized();
-} else {
-    setCookie('melodySource_Agris', "Preloaded", 1);
-    showPreloaded();
 }

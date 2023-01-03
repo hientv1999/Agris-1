@@ -39,7 +39,7 @@ function updateMusicSheet(music_notes, tempo){
             if (getCookie("melodySource_Agris") == "Customized"){
                 document.getElementById("tune-up").style = "display: inline; padding-right: 30px;";
             } else {
-                document.getElementById("tune-up-preloaded").style = "display: inline; padding-right: 30px;";
+                document.getElementById("tune-up-preloaded").style = "display: inline;";
             }
         } else {
             if (getCookie("melodySource_Agris") == "Customized"){
@@ -53,7 +53,7 @@ function updateMusicSheet(music_notes, tempo){
             if (getCookie("melodySource_Agris") == "Customized"){
                 document.getElementById("tune-down").style = "display: inline; padding-right: 30px;";
             } else {
-                document.getElementById("tune-down-preloaded").style = "display: inline; padding-right: 30px;";
+                document.getElementById("tune-down-preloaded").style = "display: inline;";
             }
         } else {
             if (getCookie("melodySource_Agris") == "Customized"){
@@ -62,6 +62,7 @@ function updateMusicSheet(music_notes, tempo){
                 document.getElementById("tune-down-preloaded").style = "display: none";
             }
         }
+        
         document.getElementById("remove").style = "display: inline; padding-right: 30px";
         document.getElementById("start-over").style = "display: inline; padding-right: 30px";
         
@@ -437,9 +438,9 @@ function showPreloaded(){
     
     document.getElementById("introduction").innerHTML = "Choose 1 of below melodies for the alarm sound. More melodies will be added in the future";
     setCookie('melodySource_Agris', "Preloaded", 1);
-    var customized_selectors = document.getElementsByClassName("entire_preloaded_melody_selector");
-    for (var i=0; i< customized_selectors.length; i++){
-        customized_selectors[i].style="display: flex; justify-content: center;";
+    var preloaded_selector = document.getElementsByClassName("entire_preloaded_melody_selector");
+    for (var i=0; i< preloaded_selector.length; i++){
+        preloaded_selector[i].style="display: flex; justify-content: center;";
     }
     
     var customized_selectors = document.getElementsByClassName("entire_customized_melody_selector");
@@ -459,9 +460,9 @@ function showCustomized(){
     document.getElementById("preloaded-melody-title").style = "background-image: none";
     document.getElementById("introduction").innerHTML = "Build your own melody";
     setCookie('melodySource_Agris', "Customized", 1);
-    var customized_selectors = document.getElementsByClassName("entire_preloaded_melody_selector");
-    for (var i=0; i< customized_selectors.length; i++){
-        customized_selectors[i].style="display: none";
+    var preloaded_selector = document.getElementsByClassName("entire_preloaded_melody_selector");
+    for (var i=0; i< preloaded_selector.length; i++){
+        preloaded_selector[i].style="display: none";
     }
 
     var customized_selectors = document.getElementsByClassName("entire_customized_melody_selector");

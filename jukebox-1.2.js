@@ -1,29 +1,7 @@
 
-
-for (let i=0; i<preloaded_melodies_name.length; i++){
-    let opt = document.createElement('option');
-    opt.value = preloaded_melodies_music[i];
-    opt.innerHTML = preloaded_melodies_name[i];
-    if (opt.value == current_song_music){
-        opt.selected = 'selected';
-        preloaded_chosen = true;
-        
-    }
-    selector.appendChild(opt);
-}
-
-if (!preloaded_chosen){
-    let opt = document.createElement('option');
-    opt.value = "";
-    opt.innerHTML = "Pick a melody";
-    opt.selected = true;
-    opt.disabled = true;
-    opt.hidden = 'hidden';
-    opt.style = "display: none";
-    selector.appendChild(opt);
-}
-
-
+const preloaded_melodies_name = ['Before Winter Ends', 'weird song'];
+const preloaded_melodies_music = ['41.50,46.25,46.25,41.25,41.25,46.25,48.5,46.25,45.5,46,50,48.25,50.25,51.25,55.25,53,50.125,51.125,53.25,51.25,51.25,50.25,48.5,46.125,48.125,50.25,51.25,50.25,48.25,46.5,46.125,48.125,50.25,46.25,46.25,43.25,46.25,46.25,48.25,48.5,46',
+                                    '50, 41.5'];
 
 function updateMusicSheet(music_notes, tempo){
     document.getElementById("submitted-melody").value = music_notes;

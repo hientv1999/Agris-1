@@ -1,0 +1,242 @@
+.bar {
+    position: relative;
+    display: inline-block;
+    width: 12px;
+    height: 32px;
+    margin: 0 12px;
+    margin-bottom: 48px;
+    width: 2px;
+    border-right: 1px solid black;
+}
+.debug .bar {
+    outline: 1px solid rgba(255, 0, 0, 0.1);
+}
+.bar.double,
+.bar.end {
+    border-left: 1px solid black;
+}
+.bar.end {
+    float: right;
+    border-right-width: 4px;
+    margin-right: 0;
+}
+.staff {
+    font-size: 0;
+    background-image: linear-gradient(180deg, #999 0, #999 1px, transparent 1px, transparent 8px, #999 8px, #999 9px, transparent 9px, transparent 16px, #999 16px, #999 17px, transparent 17px, transparent 24px, #999 24px, #999 25px, transparent 25px, transparent 32px, #999 32px, #999 33px, transparent 33px);
+    background-size: 100% 80px;
+}
+.staff.debug {
+    background-color: rgba(0, 255, 0, 0.1);
+}
+
+.note {
+    position: relative;
+    display: inline-block;
+    width: 12px;
+    height: 32px;
+    margin: 0 12px;
+    margin-bottom: 48px;
+}
+.debug .note {
+    outline: 1px solid rgba(255, 0, 0, 0.1);
+}
+.note::before {
+    height: 8px;
+    width: 12px;
+}
+.whole.note::before {
+    position: absolute;
+    content: "";
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-left-width: 4px;
+    border-right-width: 4px;
+    border-radius: 50%;
+}
+.half.note::after,
+.quarter.note::after {
+    content: "";
+    height: 28px;
+    width: 1px;
+    background-color: black;
+    position: absolute;
+    top: -24px;
+    right: 0;
+}
+.half.note::before,
+.quarter.note::before {
+    position: absolute;
+    content: "";
+    transform: rotatez(-15deg);
+    border-radius: 50%;
+}
+.half.note::before {
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-top-width: 2.18181818px;
+    border-bottom-width: 2.18181818px;
+}
+.quarter.note::before {
+    background-color: black;
+}
+/* octave 4 */
+.note.C4{
+    top: 36px;
+}
+
+.note.Cs4{
+    top: 36px;
+}
+
+.note.D4{
+    top: 32px;
+}
+
+.note.E4{
+    top: 28px;
+}
+
+.note.Eb4{
+    top: 28px;
+}
+
+.note.F4{
+    top: 24px;
+}
+
+.note.Fs4{
+    top: 24px;
+}
+
+.note.G4{
+    top: 20px;
+}
+
+.note.Gs4{
+    top: 20px;
+}
+
+.note.A4{
+    top: 16px;
+}
+
+.note.B4{
+    top: 12px;
+}
+
+.note.Bb4{
+    top: 12px;
+}
+
+/* octave 5 */
+.note.C5{
+    top: 8px;
+}
+
+.note.Cs5{
+    top: 8px;
+}
+
+.note.D5{
+    top: 4px;
+}
+
+.note.E5{
+    top: 0px;
+}
+
+.note.Eb5{
+    top: 0px;
+}
+
+.note.F5{
+    top: -4px;
+}
+
+.note.Fs5{
+    top: -4px;
+}
+
+.note.G5{
+    top: -8px;
+}
+
+.note.Gs5{
+    top: -8px;
+}
+
+.note.A5{
+    top: -12px;
+}
+
+.note.B5{
+    top: -16px;
+}
+
+.note.Bb5{
+    top: -16px;
+}
+
+
+.quarter.note.C5::after,
+.half.note.C5::after,
+.quarter.note.Cs5::after,
+.half.note.Cs5::after,
+.quarter.note.D5::after,
+.half.note.D5::after,
+.quarter.note.E5::after,
+.half.note.E5::after,
+.quarter.note.Eb5::after,
+.half.note.Eb5::after,
+.quarter.note.F5::after,
+.half.note.F5::after,
+.quarter.note.Fs5::after,
+.half.note.Fs5::after,
+.quarter.note.G5::after,
+.half.note.G5::after,
+.quarter.note.Gs5::after,
+.half.note.Gs5::after,
+.quarter.note.A5::after,
+.half.note.A5::after,
+.quarter.note.B5::after,
+.half.note.B5::after,
+.quarter.note.Bb5::after,
+.half.note.Bb5::after
+ {
+    top: 4px;
+}
+/* style for selector */
+.select{
+    position: relative;
+    min-width: 200px;
+}
+
+select{
+
+    padding: 7px 40px 7px 12px;
+    width: 200px;
+    border: 1px solid #E8EAED;
+    border-radius: 5px;
+    background: linear-gradient(to top, #8b8b8b 0%, #ffffff 100%);
+    box-shadow: 0 1px 3px -2px #9098A9;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 150ms ease;
+}
+    
+option
+{
+    color: #223254;
+}
+   
+option:focus{
+    outline: none;
+    border-color: #0077FF;
+    box-shadow: 0 0 0 2px rgba(#0077FF,.2);
+}
+    
+option:hover{
+    stroke: #0077FF;
+}

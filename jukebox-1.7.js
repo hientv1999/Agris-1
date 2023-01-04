@@ -64,7 +64,7 @@ function updateMusicSheet(music_notes, tempo){
         }
         
         document.getElementById("remove").style = "display: inline; padding-right: 30px";
-        document.getElementById("start-over").style = "display: inline; padding-right: 30px";
+        document.getElementById("start-over").style = "display: inline;";
         
     }
     

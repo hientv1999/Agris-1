@@ -97,14 +97,6 @@ $(function(){
     $('.selectpicker').selectpicker();
 });
 
-var win = navigator.platform.indexOf('Win') > -1;
-if (win && document.querySelector('#sidenav-scrollbar')) {
-    var options = {
-        damping: '0.5'
-    }
-    Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-}
-
 var screenMode_Agris = getCookie("screenMode_Agris");
 if (screenMode_Agris == "LightMode"){
     LightMode();

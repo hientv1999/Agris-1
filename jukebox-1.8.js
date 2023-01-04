@@ -480,3 +480,143 @@ function toggleMelodySource() {
     showCustomized();
     }
 }
+
+function setCookie(key, value, expiry) {
+    var expires = new Date();
+    expires.setTime(expires.getTime() + (expiry * 24 * 60 * 60 * 1000));
+    document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
+}
+
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
+
+
+
+var melody_source_Agris = getCookie("melodySource_Agris");
+if (melody_source_Agris == "Preloaded"){
+    showPreloaded();
+} else if (melody_source_Agris == "Customized"){
+    showCustomized();
+} else {
+    setCookie('melodySource_Agris', "Preloaded", 1);
+    showPreloaded();
+}
+
+function LightMode() {
+    var el = document.getElementsByClassName("color-sensitive");
+    for (var i = 0; i < el.length; i++) {
+        el[i].style.color = "#6c757d";
+    }
+    var el2 = document.getElementsByClassName("color-sensitive2");
+    for (var i = 0; i < el2.length; i++) {
+        el2[i].style.backgroundColor = "#ffffff";
+    }
+    var el3 = document.getElementsByClassName("color-sensitive3");
+    for (var i = 0; i < el3.length; i++) {
+        el3[i].style.color = "#000000";
+    }
+    var el4 = document.getElementsByClassName("background-theme");
+    for (var i = 0; i < el4.length; i++) {
+        el4[i].style.backgroundColor = "#f8f9fa";
+    }
+    var el5 = document.getElementsByClassName("color-sensitive-text");
+    for (var i = 0; i < el5.length; i++) {
+        el5[i].style.Color = "black";
+    }
+    document.getElementById("colorpicker").style.backgroundColor="#353535";
+    // var el3 = document.getElementsByClassName("color-sensitive-toggle");
+    // for (var i = 0; i < el3.length; i++) {
+    //   el3[i].style.background = "#000000";
+    // }
+    setCookie('screenMode_Agris', "LightMode", 1);
+    if (getCookie("melodySource_Agris") == "Customized"){
+        document.getElementById("customized-melody-title").style = "background-image: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.8)), url('https://drive.google.com/uc?export=view&id=1S2Vz16B5M46dWtDsirKE0TB_9H8g4xk_'); background-size: cover";
+    } else {
+        document.getElementById("preloaded-melody-title").style = "background-image: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.8)), url('https://drive.google.com/uc?export=view&id=1S2Vz16B5M46dWtDsirKE0TB_9H8g4xk_'); background-size: cover";
+    }
+}
+
+function DarkMode() {
+    var el = document.getElementsByClassName("color-sensitive");
+    for (var i = 0; i < el.length; i++) {
+        el[i].style.color = "#f8f9fa";
+    }
+    var el2 = document.getElementsByClassName("color-sensitive2");
+    for (var i = 0; i < el2.length; i++) {
+        el2[i].style.backgroundColor = "#373c42";
+    }
+    var el3 = document.getElementsByClassName("color-sensitive3");
+    for (var i = 0; i < el3.length; i++) {
+        el3[i].style.color = "#f8f9fa";
+    }
+    var el4 = document.getElementsByClassName("background-theme");
+    for (var i = 0; i < el4.length; i++) {
+        el4[i].style.backgroundColor = "#6c757d";
+    }
+    var el5 = document.getElementsByClassName("color-sensitive-text");
+    for (var i = 0; i < el5.length; i++) {
+        el5[i].style.Color = "#f8f9fa";
+    }
+    document.getElementById("colorpicker").style.backgroundColor="#4d4c4c";
+    // var el3 = document.getElementsByClassName("color-sensitive-toggle");
+    // for (var i = 0; i < el3.length; i++) {
+    //   el3[i].style.background = "#ffffff";
+    // }
+    setCookie('screenMode_Agris', "DarkMode", 1);
+    if (getCookie("melodySource_Agris") == "Customized"){
+        document.getElementById("customized-melody-title").style = "background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url('https://drive.google.com/uc?export=view&id=1S2Vz16B5M46dWtDsirKE0TB_9H8g4xk_'); background-size: cover";
+    } else {
+        document.getElementById("preloaded-melody-title").style = "background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url('https://drive.google.com/uc?export=view&id=1S2Vz16B5M46dWtDsirKE0TB_9H8g4xk_'); background-size: cover";
+    }
+}
+
+
+
+var date = new Date();
+setCookie('timezone_Agris', String(date.getTimezoneOffset()/60), 1);
+
+function googleTranslateElementInit() {       
+    new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false }, 'google_translate_element');
+}
+
+function translateLanguage(lang) {
+    googleTranslateElementInit();
+    var $frame = $('.goog-te-menu-frame:first');
+    if (!$frame.size()) {
+        alert("Error: Could not find Google translate frame.");
+        return false;
+    }
+    $frame.contents().find('.goog-te-menu2-item span.text:contains(' + lang + ')').get(0).click();
+    return false;
+}
+
+$(function(){
+    $('.selectpicker').selectpicker();
+});
+
+var win = navigator.platform.indexOf('Win') > -1;
+if (win && document.querySelector('#sidenav-scrollbar')) {
+var options = {
+    damping: '0.5'
+}
+Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+}
+
+var screenMode_Agris = getCookie("screenMode_Agris");
+if (screenMode_Agris == "LightMode"){
+    LightMode();
+} else if (screenMode_Agris == "DarkMode"){
+    DarkMode();
+} else {
+    setCookie('screenMode_Agris', "LightMode", 1);
+    LightMode();
+}

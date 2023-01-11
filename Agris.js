@@ -1,4 +1,4 @@
-// Latest version 2
+// Latest version 3
 function setCookie(key, value, expiry) {
     var expires = new Date();
     expires.setTime(expires.getTime() + (expiry * 24 * 60 * 60 * 1000));
